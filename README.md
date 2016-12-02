@@ -6,6 +6,9 @@ Message red dot count solution - 消息红点计数解决方案
 * #####[Demo下载](http://ac-nuiddhh1.clouddn.com/ad242ff781c7274bf711.apk).
  
  
+![demoImg](demo.gif) 
+ 
+ 
 ###Usage
 ------------------------------
  Add it in your root build.gradle at the end of repositories:
