@@ -70,7 +70,15 @@ public class SuperBadgeHelper implements Serializable, Cloneable {
     }
 
 
-
+    /**
+     *
+     * @param context 当前Avtivity
+     * @param view 绑定角标view
+     * @param tag 用于绑定的唯一标记
+     * @param num 角标数字
+     * @param show 是否显示数字
+     * @return SuperBadgeHelper
+     */
     public static SuperBadgeHelper init(Activity context, View view, String tag, int num,boolean show) {
         SuperBadgeHelper superBadge = SuperBadgeDater.getInstance().getBadge(tag);
         if (superBadge != null) {
@@ -192,9 +200,8 @@ public class SuperBadgeHelper implements Serializable, Cloneable {
 
 
     /**
-     * 根据Activity和tag绑定父级控件
-     *
-     * @param tag
+     * 根据父级控件tag绑定父级控件
+     * @param tag  父级控件的Tag
      */
     public void bindView(String tag) {
 

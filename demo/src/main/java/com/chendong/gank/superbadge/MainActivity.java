@@ -140,6 +140,7 @@ public class MainActivity extends Activity {
             rb2.bindView(tvsb);
             rb3.bindView(tvsb);
 
+
             setReadOnClick(textView,tvsb);
             setReadOnClick(rootbadge1,rb1);
             setReadOnClick(rootbadge2,rb2);
