@@ -4,6 +4,7 @@ package com.chendong.gank.superbadge;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v13.app.FragmentPagerAdapter;
@@ -64,12 +65,17 @@ public class MainActivity extends Activity {
     }
 
 
-    private void setOnClick(View view, final int i) {
+    private void setOnClick(final View view, final int i) {
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mViewPager.setCurrentItem(i);
+                text1.setBackgroundColor(Color.parseColor("#ffffff"));
+                text2.setBackgroundColor(Color.parseColor("#ffffff"));
+                text3.setBackgroundColor(Color.parseColor("#ffffff"));
+
+                view.setBackgroundColor(Color.parseColor("#039cd9"));
             }
         });
     }
