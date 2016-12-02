@@ -1,0 +1,22 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.chendongde310'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "25.0.0"
+
+    defaultConfig {
+        minSdkVersion 11
+        targetSdkVersion 24
+
+    }
+
+
+    dependencies {
+        compile fileTree(include: ['*.jar'], dir: 'libs')
+    }
+
+}
+
+
