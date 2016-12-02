@@ -1,8 +1,9 @@
 # SuperBadge - 超级角标
 Message red dot count solution - 消息红点计数解决方案
  
-代码解析请跳转至我的简书 
-[Android消息计数最终解决方案](http://www.jianshu.com/p/35bbe15a42fc).
+* #####代码解析请跳转至我的简书，[《Android消息计数最终解决方案》](http://www.jianshu.com/p/35bbe15a42fc).
+ 
+* #####[Demo下载](http://ac-nuiddhh1.clouddn.com/ad242ff781c7274bf711.apk).
  
  
 ###Usage
