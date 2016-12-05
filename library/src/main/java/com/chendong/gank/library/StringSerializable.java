@@ -13,9 +13,12 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 
 /**
- * 作者：陈东  —  www.renwey.com
- * 日期：2016/12/5 - 10:03
+ * 
+ * 作者：chendongde310  
+ * Github:www.github.com/chendongde310
+ * 日期：2016/12/5 - 15:37
  * 注释：
+ * 更新内容：
  */
 public class StringSerializable {
 

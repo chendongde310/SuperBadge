@@ -18,7 +18,14 @@ import android.widget.TextView;
 
 import java.io.Serializable;
 
-
+/**
+ * 
+ * 作者：chendongde310  
+ * Github:www.github.com/chendongde310
+ * 日期：2016/12/5 - 15:39
+ * 注释：https://github.com/stefanjauker/BadgeView
+ * 更新内容：
+ */
 public class BadgeManger extends  TextView implements Serializable {
 
     private boolean mHideOnNull = true;
@@ -73,26 +80,18 @@ public class BadgeManger extends  TextView implements Serializable {
         setBackgroundDrawable(bgDrawable);
     }
 
-    /**
-     * @return Returns true if view is hidden on badge value 0 or null;
-     */
+
     public boolean isHideOnNull() {
         return mHideOnNull;
     }
 
-    /**
-     * @param hideOnNull the hideOnNull to set
-     */
+
     public void setHideOnNull(boolean hideOnNull) {
         mHideOnNull = hideOnNull;
         setText(getText());
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see android.widget.TextView#setText(java.lang.CharSequence, android.widget.TextView.BufferType)
-     */
+
     @Override
     public void setText(CharSequence text, TextView.BufferType type) {
         if (isHideOnNull() && (text == null || text.toString().equalsIgnoreCase("0"))) {
@@ -162,23 +161,13 @@ public class BadgeManger extends  TextView implements Serializable {
         incrementBadgeCount(-decrement);
     }
 
-    /*
-     * Attach the BadgeView to the TabWidget
-     * 
-     * @param target the TabWidget to attach the BadgeView
-     * 
-     * @param tabIndex index of the tab
-     */
+
     public void setTargetView(TabWidget target, int tabIndex) {
         View tabView = target.getChildTabViewAt(tabIndex);
         setTargetView(tabView);
     }
 
-    /*
-     * Attach the BadgeView to the target view
-     * 
-     * @param target the view to attach the BadgeView
-     */
+
     public void setTargetView(View target) {
         if (getParent() != null) {
             ((ViewGroup) getParent()).removeView(this);
@@ -194,7 +183,7 @@ public class BadgeManger extends  TextView implements Serializable {
             ((FrameLayout) target.getParent()).addView(this);
 
         } else if (target.getParent() instanceof ViewGroup) {
-            // use a new Framelayout container for adding badge
+
             ViewGroup parentContainer = (ViewGroup) target.getParent();
             int groupIndex = parentContainer.indexOfChild(target);
             parentContainer.removeView(target);
@@ -216,9 +205,7 @@ public class BadgeManger extends  TextView implements Serializable {
 
     }
 
-    /*
-     * converts dip to px
-     */
+
     private int dip2Px(float dip) {
         return (int) (dip * getContext().getResources().getDisplayMetrics().density + 0.5f);
     }

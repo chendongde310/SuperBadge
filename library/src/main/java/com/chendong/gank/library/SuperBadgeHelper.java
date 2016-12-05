@@ -1,7 +1,6 @@
 package com.chendong.gank.library;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 
@@ -12,8 +11,15 @@ import java.util.List;
 /**
  * 作者：陈东  —  www.renwey.com
  * 日期：2016/12/1 - 18:01
- * 注释：角标助手，通过添加标签对
- * 不应该在拥有下级节点的控件上进行数字操作
+ * 注释：
+ */
+/**
+ *
+ * 作者：chendongde310
+ * Github:www.github.com/chendongde310
+ * 日期：2016/12/5 - 15:38
+ * 注释：角标助手，处理全局消息计数模型
+ * 更新内容：
  */
 public class SuperBadgeHelper implements Serializable, Cloneable  {
     private String tag; //标签
@@ -26,9 +32,16 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
     private boolean show; //是否显示数字
     private OnNumCallback onNumCallback ;
 
-
+    /**
+     * @param context 当前Avtivity
+     * @param view    绑定角标view
+     * @param tag     用于绑定的唯一标记
+     * @param num     角标数字
+     * @param show    是否显示数字
+     * @return SuperBadgeHelper
+     */
     private SuperBadgeHelper(Activity context, View view, String tag, int num, boolean show) {
-        if (SuperBadgeDater.getInstance().getBadge(context,tag) != null) {
+        if (SuperBadgeDater.getInstance().getBadge(tag) != null) {
             throw new IllegalArgumentException(tag + "标记已经被其他控件注册");
         }
         if (context == null) {
@@ -60,23 +73,9 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
         return init(context, view, tag, num, true);
     }
 
-
-
     public static SuperBadgeHelper init(Activity context, View view, String tag, boolean show) {
         return init(context, view, tag, 0, show);
     }
-
-
-
-    public static SuperBadgeHelper getSBHelper(Context context ,String tag) {
-        SuperBadgeHelper superBadge = SuperBadgeDater.getInstance().getBadge(context,tag);
-        if (superBadge == null) {
-            throw new NullPointerException("没有找到标记为[" + tag + "]的控件");
-        }
-        return superBadge;
-    }
-
-
 
     /**
      * @param context 当前Avtivity
@@ -87,7 +86,7 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
      * @return SuperBadgeHelper
      */
     public static SuperBadgeHelper init(Activity context, View view, String tag, int num, boolean show) {
-        SuperBadgeHelper superBadge = SuperBadgeDater.getInstance().getBadge(context,tag);
+        SuperBadgeHelper superBadge = SuperBadgeDater.getInstance().getBadge(tag);
         if (superBadge != null) {
             superBadge.setView(view);
             superBadge.setContext(context);
@@ -100,6 +99,15 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
         } else {
             return new SuperBadgeHelper(context, view, tag, num, show);
         }
+    }
+
+
+    public static SuperBadgeHelper getSBHelper(String tag) {
+        SuperBadgeHelper superBadge = SuperBadgeDater.getInstance().getBadge(tag);
+        if (superBadge == null) {
+            throw new NullPointerException("没有找到标记为[" + tag + "]的控件");
+        }
+        return superBadge;
     }
 
     @Deprecated
@@ -176,12 +184,7 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
         this.context = context;
     }
 
-    /**
-     * 读取所有消息，减去所有数字
-     */
-    public void read() {
-        chlidLessNum(getNum());
-    }
+
 
     public String getTag() {
         return tag;
@@ -201,6 +204,13 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
 
     public int getNum() {
         return num;
+    }
+
+    /**
+     * 读取所有消息，减去所有数字
+     */
+    public void read() {
+        chlidLessNum(getNum());
     }
 
     /**
@@ -231,7 +241,7 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
 
 
     /**
-     * 根据父级控件tag绑定父级控件
+     * 根据父级控件标签将他绑定到本级控件
      *
      * @param tag 父级控件的Tag
      */
@@ -243,8 +253,7 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
                 return;
             }
         }
-
-        SuperBadgeHelper paterBadgeHelper = SuperBadgeDater.getInstance().getBadge(context,tag);
+        SuperBadgeHelper paterBadgeHelper = SuperBadgeDater.getInstance().getBadge(tag);
         if (paterBadgeHelper != null) {
             paterBadge.add(paterBadgeHelper); //添加本级父控件
             paterBadgeHelper.addChild(this);//添加到父级子控件
