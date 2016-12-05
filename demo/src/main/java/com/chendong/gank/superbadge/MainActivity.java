@@ -38,6 +38,8 @@ public class MainActivity extends Activity {
     private PlaceholderFragment Fragment2;
     private PlaceholderFragment Fragment3;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -268,6 +270,9 @@ public class MainActivity extends Activity {
             return "页面" + position;
         }
     }
+
+
+
 
 
 }

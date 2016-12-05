@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.chendongde310'
-
+group = 'com.github.chendongde310'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
@@ -17,6 +16,5 @@ android {
         compile fileTree(include: ['*.jar'], dir: 'libs')
     }
 
+
 }
-
-

@@ -1,7 +1,7 @@
 # SuperBadge - 超级角标
 Message red dot count solution - 消息红点计数解决方案
  
-* #####代码解析请跳转至我的简书，[《Android消息计数最终解决方案》](http://www.jianshu.com/p/35bbe15a42fc).
+* #####代码解析请跳转至我的简书，[《Android消息计数最终解决方案》](http://www.jianshu.com/p/0ab751842192).
  
 * #####[Demo下载](http://ac-nuiddhh1.clouddn.com/ad242ff781c7274bf711.apk).
  
@@ -22,7 +22,7 @@ Message red dot count solution - 消息红点计数解决方案
  Step 2. Add the dependency
  
     dependencies {
-        compile 'com.github.chendongde310:SuperBadge:0.0.2'
+        compile 'com.github.chendongde310:SuperBadge:0.0.3'
     }
   
 
