@@ -9,7 +9,7 @@ Message red dot count solution - 消息红点计数解决方案
 ![demoImg](demo.gif) 
  
  
-###Usage
+###Add dependencies
 ------------------------------
  Add it in your root build.gradle at the end of repositories:
  
@@ -49,6 +49,9 @@ Message red dot count solution - 消息红点计数解决方案
           * @param tag  父级控件的Tag
           */
           SuperBadgeHelper.bindView(String tag)
+          //or
+          SuperBadgeHelper.bindView(mSuperBadgeHelper)
+          
 
 
 * step3  设置已读
@@ -57,3 +60,21 @@ Message red dot count solution - 消息红点计数解决方案
         * 读取所有消息，清空数字为0（不显示）
         */
         SuperBadgeHelper.read()
+        
+ 
+* other method
+        
+         //增加数字 - 必须为根节点控件 
+         addNum(int i)
+         //减少数字 - 必须为根节点控件 
+         lessNum(int i)
+         //是否显示角标
+         setShowBadge(boolean b)
+         //设置角标半径
+         setDipRadius(int dipRadius)
+         //设置角标颜色
+         setBadgeColor(int badgeColor)
+         
+         
+         
+         

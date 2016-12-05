@@ -91,7 +91,7 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
         if (superBadge != null) {
             superBadge.setView(view);
             superBadge.setContext(context);
-            superBadge.isShowNum(show);
+            superBadge.setShowBadge(show);
             superBadge.getBadge().setTargetView(view);
             if (superBadge.isShow()) {
                 superBadge.getBadge().setBadgeCount(superBadge.getNum());
@@ -107,15 +107,26 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
         this.onNumCallback = onNumCallback;
     }
 
+    /**
+     * 设置角标半径
+     * @param dipRadius 半径
+     */
     public void setDipRadius(int dipRadius) {
         badge.setBackground(dipRadius, Color.parseColor("#d3321b"));
     }
 
+    /**
+     * 设置角标颜色
+     * @param badgeColor 颜色
+     */
     public void setBadgeColor(int badgeColor) {
         badge.setBackground(9, badgeColor);
     }
 
-
+    /**
+     *
+     * @return
+     */
     public boolean isShow() {
         return show;
     }
@@ -286,11 +297,11 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
     }
 
     /**
-     * 关闭数字展示
+     * 是否显示角标
      *
      * @param b
      */
-    public void isShowNum(boolean b) {
+    public void setShowBadge(boolean b) {
         this.show = b;
     }
 
