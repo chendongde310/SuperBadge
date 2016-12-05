@@ -22,7 +22,7 @@ Message red dot count solution - 消息红点计数解决方案
  Step 2. Add the dependency
  
     dependencies {
-        compile 'com.github.chendongde310:SuperBadge:0.0.1'
+        compile 'com.github.chendongde310:SuperBadge:0.0.2'
     }
   
 
