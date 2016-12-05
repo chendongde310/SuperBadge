@@ -3,4 +3,6 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">页面%1$d</string>
+
+    <string name="hello_blank_fragment">Hello sb</string>
 </resources>

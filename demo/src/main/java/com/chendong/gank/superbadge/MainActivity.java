@@ -4,7 +4,7 @@ package com.chendong.gank.superbadge;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v13.app.FragmentPagerAdapter;
@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.chendong.gank.library.SuperBadgeHelper;
@@ -19,7 +20,6 @@ import com.chendong.gank.library.SuperBadgeHelper;
 import static com.chendong.gank.library.SuperBadgeHelper.init;
 
 /**
- * 
  * 作者：chendong  -  github.com/chendongde310
  * 日期：2016/12/2 - 11:25
  * 注释：
@@ -42,6 +42,12 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
+
         this.text3 = (TextView) findViewById(R.id.text3);
         this.text2 = (TextView) findViewById(R.id.text2);
         this.text1 = (TextView) findViewById(R.id.text1);
@@ -60,7 +66,34 @@ public class MainActivity extends Activity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
+
+
+            @Override
+            public void onPageSelected(int position) {
+                setColor(position);
+                switch (position){
+                    case 0:
+                        text1.setBackgroundColor(getResources().getColor(R.color.main_menu_tab));
+                        break;
+                    case 1:
+                        text2.setBackgroundColor(getResources().getColor(R.color.main_menu_tab));
+                        break;
+                    case 2:
+                        text3.setBackgroundColor(getResources().getColor(R.color.main_menu_tab));
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         mViewPager.setCurrentItem(1);
     }
 
@@ -70,16 +103,18 @@ public class MainActivity extends Activity {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mViewPager.setCurrentItem(i);
-                text1.setBackgroundColor(Color.parseColor("#ffffff"));
-                text2.setBackgroundColor(Color.parseColor("#ffffff"));
-                text3.setBackgroundColor(Color.parseColor("#ffffff"));
-
-                view.setBackgroundColor(Color.parseColor("#039cd9"));
+                setColor(i);
+                view.setBackgroundColor(getResources().getColor(R.color.main_menu_tab));
             }
         });
     }
 
+    private void setColor(int i){
+        mViewPager.setCurrentItem(i);
+        text1.setBackgroundColor(getResources().getColor(R.color.white));
+        text2.setBackgroundColor(getResources().getColor(R.color.white));
+        text3.setBackgroundColor(getResources().getColor(R.color.white));
+    }
 
     public static class PlaceholderFragment extends Fragment {
 
@@ -122,7 +157,7 @@ public class MainActivity extends Activity {
                                  Bundle savedInstanceState) {
 
             String sectionNumber = String.valueOf(getArguments().getInt(ARG_SECTION_NUMBER));
-            String tag =  getArguments().getString(SUPER_BADGE_TAG);
+            String tag = getArguments().getString(SUPER_BADGE_TAG);
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             this.rootbadge3 = (TextView) rootView.findViewById(R.id.root_badge_3);
             this.rootbadge2 = (TextView) rootView.findViewById(R.id.root_badge_2);
@@ -134,23 +169,27 @@ public class MainActivity extends Activity {
 
 
             textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText("读取全部"+tag+"节点");
-            tvsb = init(getActivity(), textView, "textView" + sectionNumber,false);
+            textView.setText("读取全部" + tag + "节点");
+            tvsb = init(getActivity(), textView, "textView" + sectionNumber, false);
             tvsb.bindView(getArguments().getString(SUPER_BADGE_TAG));
 
 
-            rb1 = SuperBadgeHelper.init(getActivity(), rootbadge1, "R.id.root_badge_1"+sectionNumber, 3);
-            rb2 = SuperBadgeHelper.init(getActivity(), rootbadge2, "R.id.root_badge_2"+sectionNumber, 1);
-            rb3 = SuperBadgeHelper.init(getActivity(), rootbadge3, "R.id.root_badge_3"+sectionNumber, 7);
+            rb1 = SuperBadgeHelper.init(getActivity(), rootbadge1, "R.id.root_badge_1" + sectionNumber, 3);
+            rb2 = SuperBadgeHelper.init(getActivity(), rootbadge2, "R.id.root_badge_2" + sectionNumber, 1);
+            rb3 = SuperBadgeHelper.init(getActivity(), rootbadge3, "R.id.root_badge_3" + sectionNumber, 7);
             rb1.bindView(tvsb);
             rb2.bindView(tvsb);
             rb3.bindView(tvsb);
 
+//            rb1.setBadgeColor(Color.parseColor("#d3321b"));
+//            rb2.setBadgeColor(Color.parseColor("#d3321b"));
+//            rb3.setBadgeColor(Color.parseColor("#d3321b"));
 
-            setReadOnClick(textView,tvsb);
-            setReadOnClick(rootbadge1,rb1);
-            setReadOnClick(rootbadge2,rb2);
-            setReadOnClick(rootbadge3,rb3);
+
+            setReadOnClick(textView, tvsb);
+            setReadOnClick(rootbadge1, rb1);
+            setReadOnClick(rootbadge2, rb2);
+            setReadOnClick(rootbadge3, rb3);
 
 
             //模拟消息添加
@@ -168,14 +207,14 @@ public class MainActivity extends Activity {
                                 }
                             });
                             try {
-                                Thread.sleep((int) (Math.random() * 10000));
+                                Thread.sleep((int) (Math.random() * 3000 + 10000));
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
                         }
                     }
                 });
-                thread.start();
+                 thread.start();
             }
 
 
@@ -195,8 +234,8 @@ public class MainActivity extends Activity {
     }
 
 
-
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -221,6 +260,8 @@ public class MainActivity extends Activity {
         public int getCount() {
             return 3;
         }
+
+
 
         @Override
         public CharSequence getPageTitle(int position) {

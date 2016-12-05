@@ -16,8 +16,10 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+import java.io.Serializable;
 
-public class BadgeManger extends  TextView {
+
+public class BadgeManger extends  TextView implements Serializable {
 
     private boolean mHideOnNull = true;
 

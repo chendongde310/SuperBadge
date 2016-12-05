@@ -4,11 +4,11 @@ group='com.github.chendongde310'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "25.0.0"
+    buildToolsVersion "23.0.1"
 
     defaultConfig {
         minSdkVersion 11
-        targetSdkVersion 24
+        targetSdkVersion 23
 
     }
 

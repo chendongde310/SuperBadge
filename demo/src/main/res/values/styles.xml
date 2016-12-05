@@ -6,6 +6,17 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+
+    <!--——————————————————————————————没有空隙的横线———————————————————————————————————-->
+    <style name="Right_Left_NO_Spacing_Horizontal_Line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:background">@color/deepAndGray</item>
     </style>
 
 </resources>
