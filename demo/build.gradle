@@ -29,5 +29,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'com.orhanobut:logger:1.10'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
-    compile 'com.github.chendongde310:SuperBadge:0.0.1'
+    compile 'com.github.chendongde310:SuperBadge:latest.release'
 }
