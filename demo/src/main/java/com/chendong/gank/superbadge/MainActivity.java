@@ -172,13 +172,13 @@ public class MainActivity extends Activity {
 
             textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText("读取全部" + tag + "节点");
-            tvsb = init(getActivity(), textView, "textView" + sectionNumber, false);
+            tvsb = init(getActivity(), textView, "textView" + sectionNumber, 0);
             tvsb.bindView(getArguments().getString(SUPER_BADGE_TAG));
 
 
-            rb1 = SuperBadgeHelper.init(getActivity(), rootbadge1, "R.id.root_badge_1" + sectionNumber, 3);
-            rb2 = SuperBadgeHelper.init(getActivity(), rootbadge2, "R.id.root_badge_2" + sectionNumber, 1);
-            rb3 = SuperBadgeHelper.init(getActivity(), rootbadge3, "R.id.root_badge_3" + sectionNumber, 7);
+            rb1 = SuperBadgeHelper.init(getActivity(), rootbadge1, "R.id.root_badge_1" + sectionNumber, 3,SuperBadgeHelper.STYLE_SMALL);
+            rb2 = SuperBadgeHelper.init(getActivity(), rootbadge2, "R.id.root_badge_2" + sectionNumber, 1,SuperBadgeHelper.STYLE_GONE);
+            rb3 = SuperBadgeHelper.init(getActivity(), rootbadge3, "R.id.root_badge_3" + sectionNumber, 7,SuperBadgeHelper.STYLE_DEFAULT);
             rb1.bindView(tvsb);
             rb2.bindView(tvsb);
             rb3.bindView(tvsb);

@@ -13,15 +13,21 @@ import java.util.List;
  * 日期：2016/12/1 - 18:01
  * 注释：
  */
+
 /**
- *
  * 作者：chendongde310
  * Github:www.github.com/chendongde310
  * 日期：2016/12/5 - 15:38
  * 注释：角标助手，处理全局消息计数模型
  * 更新内容：
+ * 1.添加小红点
  */
-public class SuperBadgeHelper implements Serializable, Cloneable  {
+public class SuperBadgeHelper implements Serializable, Cloneable {
+
+    public static final int STYLE_DEFAULT = 1;
+    public static final int STYLE_GONE = 0;
+    public static final int STYLE_SMALL = 2;
+
     private String tag; //标签
     private View view; //寄生控件
     private int num; //计数
@@ -29,18 +35,18 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
     private List<SuperBadgeHelper> childBadge = new ArrayList<>();//关联的下级节点
     private Activity context; //控件所在页面
     private BadgeManger badge;//红点管理器
-    private boolean show; //是否显示数字
-    private OnNumCallback onNumCallback ;
+    private int style; // 数字样式
+    private OnNumCallback onNumCallback;
 
     /**
      * @param context 当前Avtivity
      * @param view    绑定角标view
      * @param tag     用于绑定的唯一标记
      * @param num     角标数字
-     * @param show    是否显示数字
+     * @param style   是否显示数字
      * @return SuperBadgeHelper
      */
-    private SuperBadgeHelper(Activity context, View view, String tag, int num, boolean show) {
+    private SuperBadgeHelper(Activity context, View view, String tag, int num, int style) {
         if (SuperBadgeDater.getInstance().getBadge(tag) != null) {
             throw new IllegalArgumentException(tag + "标记已经被其他控件注册");
         }
@@ -58,46 +64,44 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
         this.view = view;
         this.num = num;
         this.context = context;
-        this.show = show;
+        this.style = style;
 
         badge = new BadgeManger(context);
         badge.setTargetView(view);
+        badge.setBadgeStyle(style);
         paterAddNum(num);
     }
 
     public static SuperBadgeHelper init(Activity context, View view, String tag) {
-        return init(context, view, tag, 0, true);
+        return init(context, view, tag, 0);
     }
 
     public static SuperBadgeHelper init(Activity context, View view, String tag, int num) {
-        return init(context, view, tag, num, true);
+        return init(context, view, tag, num, STYLE_DEFAULT);
     }
 
-    public static SuperBadgeHelper init(Activity context, View view, String tag, boolean show) {
-        return init(context, view, tag, 0, show);
-    }
 
     /**
      * @param context 当前Avtivity
      * @param view    绑定角标view
      * @param tag     用于绑定的唯一标记
      * @param num     角标数字
-     * @param show    是否显示数字
+     * @param style   是否显示数字
      * @return SuperBadgeHelper
      */
-    public static SuperBadgeHelper init(Activity context, View view, String tag, int num, boolean show) {
+    public static SuperBadgeHelper init(Activity context, View view, String tag, int num, int style) {
         SuperBadgeHelper superBadge = SuperBadgeDater.getInstance().getBadge(tag);
         if (superBadge != null) {
             superBadge.setView(view);
             superBadge.setContext(context);
-            superBadge.setShowBadge(show);
+            superBadge.setBadgeStyle(style);
             superBadge.getBadge().setTargetView(view);
-            if (superBadge.isShow()) {
+            if (superBadge.getStyle()) {
                 superBadge.getBadge().setBadgeCount(superBadge.getNum());
             }
             return superBadge;
         } else {
-            return new SuperBadgeHelper(context, view, tag, num, show);
+            return new SuperBadgeHelper(context, view, tag, num, style);
         }
     }
 
@@ -110,6 +114,7 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
         return superBadge;
     }
 
+
     @Deprecated
     public void setOnNumCallback(OnNumCallback onNumCallback) {
         this.onNumCallback = onNumCallback;
@@ -117,6 +122,7 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
 
     /**
      * 设置角标半径
+     *
      * @param dipRadius 半径
      */
     public void setDipRadius(int dipRadius) {
@@ -125,6 +131,7 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
 
     /**
      * 设置角标颜色
+     *
      * @param badgeColor 颜色
      */
     public void setBadgeColor(int badgeColor) {
@@ -132,11 +139,10 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
     }
 
     /**
-     *
      * @return
      */
-    public boolean isShow() {
-        return show;
+    public boolean getStyle() {
+        return style != STYLE_GONE;
     }
 
 
@@ -159,12 +165,10 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
 
     private void paterAddNum(int i) {
         if (i < 0) {
-           // throw new IllegalArgumentException("添加数字不能小于0");
-        }else {
+            // throw new IllegalArgumentException("添加数字不能小于0");
+        } else {
             this.num = this.num + i;
-            if (show) {
-                badge.setBadgeCount(num);
-            }
+            badge.setBadgeCount(num);
             SuperBadgeDater.getInstance().addBadge(this);
             //传递变化到上级控件
             for (SuperBadgeHelper bean : paterBadge) {
@@ -183,7 +187,6 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
     private void setContext(Activity context) {
         this.context = context;
     }
-
 
 
     public String getTag() {
@@ -218,9 +221,9 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
      */
     private void chlidLessNum(int i) {
         if (i > 0) {
-            if (show) {
-                badge.setBadgeCount(getNum() - i);
-            }
+
+            badge.setBadgeCount(getNum() - i);
+
             this.num = num - i;
             SuperBadgeDater.getInstance().addBadge(this);
             changeBadge(i);
@@ -306,15 +309,14 @@ public class SuperBadgeHelper implements Serializable, Cloneable  {
     }
 
     /**
-     * 是否显示角标
+     * 角标样式
      *
-     * @param b
+     * @param style
      */
-    public void setShowBadge(boolean b) {
-        this.show = b;
+    public void setBadgeStyle(int style) {
+        this.style = style;
+        badge.setBadgeCount(style);
     }
-
-
 
 
     public interface OnNumCallback {

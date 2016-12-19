@@ -76,5 +76,11 @@ Message red dot count solution - 消息红点计数解决方案
          setBadgeColor(int badgeColor)
          
          
-         
+#TO DO
+
+* 提供自定义绘制方法
+* 小红点（不显示具体数字，半径小的红点提示）
+* read()方法 异步（网络 、数据库读写）请求失败后的处理
+* 增加将节点标记为未读状态功能（+1s）
+
          

@@ -33,6 +33,7 @@
             android:id="@+id/text2"
             android:text="好友"
             android:textColor="#000000"
+            android:visibility="visible"
             android:gravity="center"
             android:layout_weight="1"
             android:layout_width="wrap_content"

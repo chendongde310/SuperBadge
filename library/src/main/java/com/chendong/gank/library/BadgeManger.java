@@ -19,16 +19,19 @@ import android.widget.TextView;
 import java.io.Serializable;
 
 /**
- * 
- * 作者：chendongde310  
+ * 作者：chendongde310
  * Github:www.github.com/chendongde310
  * 日期：2016/12/5 - 15:39
  * 注释：https://github.com/stefanjauker/BadgeView
  * 更新内容：
  */
-public class BadgeManger extends  TextView implements Serializable {
+public class BadgeManger extends TextView implements Serializable {
 
+    public static final int STYLE_DEFAULT = 1;
+    public static final int STYLE_GONE = 0;
+    public static final int STYLE_SMALL = 2;
     private boolean mHideOnNull = true;
+    private int style;
 
     public BadgeManger(Context context) {
         this(context, null);
@@ -72,12 +75,34 @@ public class BadgeManger extends  TextView implements Serializable {
 
     public void setBackground(int dipRadius, int badgeColor) {
         int radius = dip2Px(dipRadius);
-        float[] radiusArray = new float[] { radius, radius, radius, radius, radius, radius, radius, radius };
+        float[] radiusArray = new float[]{radius, radius, radius, radius, radius, radius, radius, radius};
 
         RoundRectShape roundRect = new RoundRectShape(radiusArray, null, null);
         ShapeDrawable bgDrawable = new ShapeDrawable(roundRect);
         bgDrawable.getPaint().setColor(badgeColor);
         setBackgroundDrawable(bgDrawable);
+    }
+
+    public void setBadgeStyle(int style) {
+        this.style = style;
+        switch (style) {
+            case STYLE_DEFAULT:
+                setVisibility(View.VISIBLE);
+                break;
+            case STYLE_SMALL:
+                setVisibility(View.VISIBLE);
+                setSmallBadge();
+                break;
+            case STYLE_GONE:
+                setVisibility(View.GONE);
+                break;
+        }
+
+    }
+
+    private void setSmallBadge() {
+        setWidth(dip2Px(7.5f));
+        setHeight(dip2Px(7.5f));
     }
 
 
@@ -99,30 +124,20 @@ public class BadgeManger extends  TextView implements Serializable {
         } else {
             setVisibility(View.VISIBLE);
         }
+        if (style == STYLE_GONE) {
+            setVisibility(View.GONE);
+        }
         super.setText(text, type);
     }
 
+
     public void setBadgeCount(int count) {
-        setText(String.valueOf(count));
-    }
 
-    public Integer getBadgeCount() {
-        if (getText() == null) {
-            return null;
+        if (style == STYLE_SMALL && count != 0) {
+            setText(String.valueOf(""));
+        } else {
+            setText(String.valueOf(count));
         }
-
-        String text = getText().toString();
-        try {
-            return Integer.parseInt(text);
-        } catch (NumberFormatException e) {
-            return null;
-        }
-    }
-
-    public void setBadgeGravity(int gravity) {
-        LayoutParams params = (LayoutParams) getLayoutParams();
-        params.gravity = gravity;
-        setLayoutParams(params);
     }
 
     public int getBadgeGravity() {
@@ -130,8 +145,10 @@ public class BadgeManger extends  TextView implements Serializable {
         return params.gravity;
     }
 
-    public void setBadgeMargin(int dipMargin) {
-        setBadgeMargin(dipMargin, dipMargin, dipMargin, dipMargin);
+    public void setBadgeGravity(int gravity) {
+        LayoutParams params = (LayoutParams) getLayoutParams();
+        params.gravity = gravity;
+        setLayoutParams(params);
     }
 
     public void setBadgeMargin(int leftDipMargin, int topDipMargin, int rightDipMargin, int bottomDipMargin) {
@@ -145,20 +162,11 @@ public class BadgeManger extends  TextView implements Serializable {
 
     public int[] getBadgeMargin() {
         LayoutParams params = (LayoutParams) getLayoutParams();
-        return new int[] { params.leftMargin, params.topMargin, params.rightMargin, params.bottomMargin };
+        return new int[]{params.leftMargin, params.topMargin, params.rightMargin, params.bottomMargin};
     }
 
-    public void incrementBadgeCount(int increment) {
-        Integer count = getBadgeCount();
-        if (count == null) {
-            setBadgeCount(increment);
-        } else {
-            setBadgeCount(increment + count);
-        }
-    }
-
-    public void decrementBadgeCount(int decrement) {
-        incrementBadgeCount(-decrement);
+    public void setBadgeMargin(int dipMargin) {
+        setBadgeMargin(dipMargin, dipMargin, dipMargin, dipMargin);
     }
 
 
@@ -178,7 +186,6 @@ public class BadgeManger extends  TextView implements Serializable {
         }
 
 
-
         if (target.getParent() instanceof FrameLayout) {
             ((FrameLayout) target.getParent()).addView(this);
 
@@ -193,7 +200,7 @@ public class BadgeManger extends  TextView implements Serializable {
 
             badgeContainer.setLayoutParams(parentLayoutParams);
             target.setLayoutParams(new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
             parentContainer.addView(badgeContainer, groupIndex, parentLayoutParams);
             badgeContainer.addView(target);
