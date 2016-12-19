@@ -86,7 +86,7 @@ public class SuperBadgeHelper implements Serializable, Cloneable {
      * @param view    绑定角标view
      * @param tag     用于绑定的唯一标记
      * @param num     角标数字
-     * @param style   是否显示数字
+     * @param style   显示样式
      * @return SuperBadgeHelper
      */
     public static SuperBadgeHelper init(Activity context, View view, String tag, int num, int style) {
@@ -315,7 +315,15 @@ public class SuperBadgeHelper implements Serializable, Cloneable {
      */
     public void setBadgeStyle(int style) {
         this.style = style;
-        badge.setBadgeCount(style);
+        badge.setBadgeStyle(style);
+    }
+
+    /**
+     * 为0时是否显示
+     * @param mHideOnNull
+     */
+    public void setHideOnNull(boolean mHideOnNull) {
+        badge.setHideOnNull(mHideOnNull);
     }
 
 

@@ -37,10 +37,10 @@ Message red dot count solution - 消息红点计数解决方案
              * @param view 绑定角标view
              * @param tag 用于绑定的唯一标记
              * @param num 角标数字
-             * @param show 是否显示数字
+             * @param style 显示样式  （如使用小图标，设置样式为 STYLE_SMALL ）
              * @return SuperBadgeHelper
              */
-        SuperBadgeHelper.init(Activity context, View view, String tag, int num,boolean show)
+        SuperBadgeHelper.init(Activity context, View view, String tag, int num,int style)
 
 * step2  绑定上级控件
     
@@ -57,7 +57,7 @@ Message red dot count solution - 消息红点计数解决方案
 * step3  设置已读
 
         /**
-        * 读取所有消息，清空数字为0（不显示）
+        * 读取所有消息，清空数字为0 
         */
         SuperBadgeHelper.read()
         
@@ -74,13 +74,17 @@ Message red dot count solution - 消息红点计数解决方案
          setDipRadius(int dipRadius)
          //设置角标颜色
          setBadgeColor(int badgeColor)
-         
+         //设置样式 （STYLE_DEFAULT、STYLE_GONE、STYLE_SMALL） 
+         setBadgeStyle(int style)
+         //为0时是否隐藏badge(默认隐藏)
+         setHideOnNull(boolean mHideOnNull)
          
 #TO DO
 
 * 提供自定义绘制方法
-* 小红点（不显示具体数字，半径小的红点提示）
+* （已完成）小红点（不显示具体数字，半径小的红点提示） 
 * read()方法 异步（网络 、数据库读写）请求失败后的处理
 * 增加将节点标记为未读状态功能（+1s）
+* 桌面（APP图标）角标显示
 
          

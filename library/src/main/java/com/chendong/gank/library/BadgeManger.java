@@ -88,6 +88,7 @@ public class BadgeManger extends TextView implements Serializable {
         switch (style) {
             case STYLE_DEFAULT:
                 setVisibility(View.VISIBLE);
+                init();
                 break;
             case STYLE_SMALL:
                 setVisibility(View.VISIBLE);
