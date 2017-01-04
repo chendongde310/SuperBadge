@@ -141,6 +141,7 @@ public class SuperBadgeHelper implements Serializable, Cloneable {
 
     public void setBackground(int dipRadius, int badgeColor) {
         badge.setBackground(dipRadius, badgeColor);
+
     }
 
     /**
