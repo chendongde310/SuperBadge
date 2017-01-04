@@ -183,6 +183,8 @@ public class MainActivity extends Activity {
             rb2.bindView(tvsb);
             rb3.bindView(tvsb);
 
+
+
 //            rb1.setBadgeColor(Color.parseColor("#d3321b"));
 //            rb2.setBadgeColor(Color.parseColor("#d3321b"));
 //            rb3.setBadgeColor(Color.parseColor("#d3321b"));

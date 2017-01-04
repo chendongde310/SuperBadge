@@ -138,6 +138,11 @@ public class SuperBadgeHelper implements Serializable, Cloneable {
         badge.setBackground(9, badgeColor);
     }
 
+
+    public void setBackground(int dipRadius, int badgeColor) {
+        badge.setBackground(dipRadius, badgeColor);
+    }
+
     /**
      * @return
      */
@@ -330,6 +335,22 @@ public class SuperBadgeHelper implements Serializable, Cloneable {
     public interface OnNumCallback {
         int lodingNum();//加载数字方法
     }
+
+
+    public void setBadgeGravity(int gravity) {
+        badge.setBadgeGravity(gravity);
+    }
+
+
+    public void setBadgeMargin(int dipMargin) {
+        badge.setBadgeMargin(dipMargin);
+    }
+
+    public void setBadgeMargin(int leftDipMargin, int topDipMargin, int rightDipMargin, int bottomDipMargin) {
+        badge.setBadgeMargin( leftDipMargin,  topDipMargin,  rightDipMargin,  bottomDipMargin);
+    }
+
+
 
 
 }
