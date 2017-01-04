@@ -151,7 +151,7 @@ public class SuperBadgeHelper implements Serializable, Cloneable {
     }
 
 
-    private BadgeManger getBadge() {
+    public  BadgeManger getBadge() {
         return badge;
     }
 
