@@ -9,12 +9,7 @@ android {
         minSdkVersion 11
         targetSdkVersion 23
         versionCode 3
-        versionName "0.2"
-    }
-
-
-    dependencies {
-        compile fileTree(include: ['*.jar'], dir: 'libs')
+        versionName "0.2.1"
     }
 
 
